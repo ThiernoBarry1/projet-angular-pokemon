@@ -20,12 +20,6 @@ var AppComponent = /** @class */ (function () {
     AppComponent.prototype.ngOnInit = function () {
         this.pokemons = mock_pokemons_1.POKEMONS;
     };
-    AppComponent.prototype.onClick = function () {
-        console.log('cliquer');
-    };
-    AppComponent.prototype.onKey = function (event) {
-        this.value = "Bonjour " + event;
-    };
     AppComponent.prototype.selectPokemon = function (pokemon) {
         alert("vous avez cliquer sur " + pokemon.name);
     };

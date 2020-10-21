@@ -1,11 +1,19 @@
-<h1>{{ titre }}</h1>
-<ul>
-    <li>BulBizarre</li>
-    <li>Salmamèche</li>
-    <li>Carapuce</li>
-</ul>
-<button (click)="onClick()">Cliquer ici</button>
-<input #boxEntrer (keyup) = "onKey(box.value)">
-<p>{{ boxEntrer.value}}</p>
-<input #box (keyup.enter)="value=box.value" (blur)="value=box.value">
-<p> {{ box.value }}</p>
+
+<h1 class="center">Pokémons</h1>
+<div class="container">
+    <div class="row">
+        <div *ngFor='let pokemon of pokemons' class="col s6 m4">
+            <div class="card horizontal" (click)="selectPokemon(pokemon)">
+                <div class="card-image">
+                    <img [src]="pokemon.picture" alt="pokemon.name">
+                </div>
+                <div class="card-stacked">
+                    <div class="card-content">
+                      <p>{{pokemon.name}}</p>
+                      <p><small>{{ pokemon.created }}</small></p>
+                    </div>
+                 </div>   
+            </div>
+        </div>
+    </div>
+</div>
