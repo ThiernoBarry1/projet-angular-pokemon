@@ -25,8 +25,8 @@ export class AppComponent  implements OnInit{
     onClick(){
         console.log('cliquer');
     }
-    onKey(event:any){
-         this.value = "Bonjour "+ event.target.value;
+    onKey(event:string){
+         this.value = "Bonjour "+ event;
     }
     selectPokemon(pokemon: Pokemon){
        alert("vous avez cliquer sur "+pokemon.name);

@@ -13,7 +13,7 @@ var AppComponent = /** @class */ (function () {
         this.titre = "Liste des pokémons";
         this.value = "";
     }
-    /** plutot conseiller d'initialiser les données
+    /** plutôt conseiller d'initialiser les données
      venant de l'exterieurs(server, base de données)
      que dans le constructeur.
     */
@@ -24,7 +24,7 @@ var AppComponent = /** @class */ (function () {
         console.log('cliquer');
     };
     AppComponent.prototype.onKey = function (event) {
-        this.value = "Bonjour " + event.target.value;
+        this.value = "Bonjour " + event;
     };
     AppComponent.prototype.selectPokemon = function (pokemon) {
         alert("vous avez cliquer sur " + pokemon.name);

@@ -5,5 +5,7 @@
     <li>Carapuce</li>
 </ul>
 <button (click)="onClick()">Cliquer ici</button>
-<input (keyup) = "onKey($event)" type="text">
-<p>{{ value}}</p>
+<input #boxEntrer (keyup) = "onKey(box.value)">
+<p>{{ boxEntrer.value}}</p>
+<input #box (keyup.enter)="value=box.value" (blur)="value=box.value">
+<p> {{ box.value }}</p>
