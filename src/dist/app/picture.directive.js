@@ -10,50 +10,50 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var BorderCardDirective = /** @class */ (function () {
-    function BorderCardDirective(el) {
+var PictureDirective = /** @class */ (function () {
+    function PictureDirective(el) {
         this.el = el;
         this.initialColor = '#f5f5f5';
-        this.defaultHeigth = 180;
+        this.defaultHeigth = 150;
         this.setBorder(this.initialColor);
         this.setHeight(this.defaultHeigth);
     }
-    BorderCardDirective.prototype.onMouseEnter = function () {
+    PictureDirective.prototype.onOver = function () {
         this.setBorder(this.borderColor || this.defaultColor);
     };
-    BorderCardDirective.prototype.onMouseLeave = function () {
+    PictureDirective.prototype.onMouseLeave = function () {
         this.setBorder(this.initialColor);
     };
-    BorderCardDirective.prototype.setBorder = function (color) {
+    PictureDirective.prototype.setBorder = function (color) {
         var border = ' solid 4px' + color;
         this.el.nativeElement.style.border = border;
     };
-    BorderCardDirective.prototype.setHeight = function (taille) {
+    PictureDirective.prototype.setHeight = function (taille) {
         this.el.nativeElement.style.height = taille;
     };
     __decorate([
-        core_1.Input('pkmnBorderCard'),
+        core_1.Input('pkmnPicture'),
         __metadata("design:type", String)
-    ], BorderCardDirective.prototype, "borderColor", void 0);
+    ], PictureDirective.prototype, "borderColor", void 0);
     __decorate([
         core_1.HostListener('mouseenter'),
         __metadata("design:type", Function),
         __metadata("design:paramtypes", []),
         __metadata("design:returntype", void 0)
-    ], BorderCardDirective.prototype, "onMouseEnter", null);
+    ], PictureDirective.prototype, "onOver", null);
     __decorate([
         core_1.HostListener('mouseleave'),
         __metadata("design:type", Function),
         __metadata("design:paramtypes", []),
         __metadata("design:returntype", void 0)
-    ], BorderCardDirective.prototype, "onMouseLeave", null);
-    BorderCardDirective = __decorate([
+    ], PictureDirective.prototype, "onMouseLeave", null);
+    PictureDirective = __decorate([
         core_1.Directive({
-            selector: '[pkmnBorderCard]'
+            selector: '[pkmnPicture]'
         }),
         __metadata("design:paramtypes", [core_1.ElementRef])
-    ], BorderCardDirective);
-    return BorderCardDirective;
+    ], PictureDirective);
+    return PictureDirective;
 }());
-exports.BorderCardDirective = BorderCardDirective;
-//# sourceMappingURL=border-card.directive.js.map
+exports.PictureDirective = PictureDirective;
+//# sourceMappingURL=picture.directive.js.map
