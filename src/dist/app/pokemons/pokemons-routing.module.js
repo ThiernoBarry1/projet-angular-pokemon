@@ -10,9 +10,11 @@ var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var list_pokemon_component_1 = require("./list-pokemon.component");
 var detail_pokemon_component_1 = require("./detail-pokemon.component");
+var edit_pokemon_component_1 = require("./edit-pokemon.component");
 // les routes du module Pokémon
 var pokemonsRoutes = [
     { path: 'pokemons', component: list_pokemon_component_1.ListPokemonComponent },
+    { path: 'pokemon/edit/:id', component: edit_pokemon_component_1.EditPokemonComponent },
     { path: 'pokemon/:id', component: detail_pokemon_component_1.DetailPokemonComponent }
 ];
 var PokemonsRoutingModule = /** @class */ (function () {

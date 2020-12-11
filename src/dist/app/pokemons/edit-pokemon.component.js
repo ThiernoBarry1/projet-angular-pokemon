@@ -12,32 +12,25 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var pokemons_service_1 = require("./pokemons.service");
-var DetailPokemonComponent = /** @class */ (function () {
-    function DetailPokemonComponent(route, router, pokemonsService) {
+var EditPokemonComponent = /** @class */ (function () {
+    function EditPokemonComponent(route, pokemonsService) {
         this.route = route;
-        this.router = router;
         this.pokemonsService = pokemonsService;
         this.pokemon = null;
     }
-    DetailPokemonComponent.prototype.ngOnInit = function () {
-        var id = +this.route.snapshot.paramMap.get('id');
+    EditPokemonComponent.prototype.ngOnInit = function () {
+        var id = +this.route.snapshot.params['id'];
         this.pokemon = this.pokemonsService.getPokemon(id);
     };
-    DetailPokemonComponent.prototype.goBack = function () {
-        this.router.navigate(['/pokemons']);
-        // ou window.history.back();
-    };
-    DetailPokemonComponent.prototype.goEdit = function (pokemon) {
-        this.router.navigate(['/pokemon/edit/', pokemon.id]);
-    };
-    DetailPokemonComponent = __decorate([
+    EditPokemonComponent = __decorate([
         core_1.Component({
-            selector: 'detail-pokemon',
-            templateUrl: './app/pokemons/detail-pokemon.component.html',
+            selector: 'edit-pokemon',
+            template: "\n    <h2 class=\"header center\">Editer {{ pokemon?.name }}</h2>\n        <p class=\"center\">\n            <img *ngIf=\"pokemon\" [src]=\"pokemon.picture\"/>\n        </p>\n    <pokemon-form [pokemon]=\"pokemon\"></pokemon-form>\n  ",
         }),
-        __metadata("design:paramtypes", [router_1.ActivatedRoute, router_1.Router, pokemons_service_1.PokemonsService])
-    ], DetailPokemonComponent);
-    return DetailPokemonComponent;
+        __metadata("design:paramtypes", [router_1.ActivatedRoute,
+            pokemons_service_1.PokemonsService])
+    ], EditPokemonComponent);
+    return EditPokemonComponent;
 }());
-exports.DetailPokemonComponent = DetailPokemonComponent;
-//# sourceMappingURL=detail-pokemon.component.js.map
+exports.EditPokemonComponent = EditPokemonComponent;
+//# sourceMappingURL=edit-pokemon.component.js.map

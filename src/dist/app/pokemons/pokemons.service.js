@@ -24,6 +24,19 @@ var PokemonsService = /** @class */ (function () {
             }
         }
     };
+    PokemonsService.prototype.getPokemonTypes = function () {
+        var pokemonsType = [];
+        var pokemons = this.getPokemons();
+        for (var index = 0; index < pokemons.length; index++) {
+            var types = pokemons[index].types;
+            for (var i = 0; i < types.length; i++) {
+                if (pokemonsType.indexOf(types[i]) != -1) {
+                    pokemonsType.push(types[i]);
+                }
+            }
+        }
+        return pokemonsType;
+    };
     PokemonsService = __decorate([
         core_1.Injectable()
     ], PokemonsService);
