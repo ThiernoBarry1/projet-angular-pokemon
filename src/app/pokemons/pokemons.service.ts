@@ -23,11 +23,10 @@ export class PokemonsService {
     getPokemonTypes():Array<string>{
       let pokemonsType: Array<string> = [];
       let pokemons = this.getPokemons();
-
       for(let index = 0; index < pokemons.length; index++ ){
         let types = pokemons[index].types;
         for(let i = 0; i< types.length; i++){
-          if(pokemonsType.indexOf(types[i]) != -1 ){
+          if(pokemonsType.indexOf(types[i]) === -1 ){
             pokemonsType.push(types[i]); 
           }
         }

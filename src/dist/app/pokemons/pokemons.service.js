@@ -30,7 +30,7 @@ var PokemonsService = /** @class */ (function () {
         for (var index = 0; index < pokemons.length; index++) {
             var types = pokemons[index].types;
             for (var i = 0; i < types.length; i++) {
-                if (pokemonsType.indexOf(types[i]) != -1) {
+                if (pokemonsType.indexOf(types[i]) === -1) {
                     pokemonsType.push(types[i]);
                 }
             }
