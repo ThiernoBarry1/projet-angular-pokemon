@@ -19,8 +19,10 @@ var EditPokemonComponent = /** @class */ (function () {
         this.pokemon = null;
     }
     EditPokemonComponent.prototype.ngOnInit = function () {
+        var _this = this;
         var id = +this.route.snapshot.params['id'];
-        this.pokemon = this.pokemonsService.getPokemon(id);
+        this.pokemonsService.getPokemon(id)
+            .subscribe(function (pokemon) { return _this.pokemon = pokemon; });
     };
     EditPokemonComponent = __decorate([
         core_1.Component({

@@ -1,29 +1,49 @@
 import { Injectable } from '@angular/core';
 import { Pokemon } from './pokemon';
-import { POKEMONS } from './mock-pokemons';
-  
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { Observable, of } from "rxjs";
+import { catchError, map, tap } from "rxjs/operators";
+
 @Injectable()
 export class PokemonsService {
-  
+    private pokemonsUrl = "api/pokemons" ;
+    constructor(private http: HttpClient){}
+    
     // Retourne tous les pokémons
-    getPokemons(): Pokemon[] {
-      return POKEMONS;
+    getPokemons(): Observable<Pokemon[]> {
+      return this.http.get<Pokemon[]>(this.pokemonsUrl).pipe(
+        tap(_=>this.log(`fetched pokemons`)),
+        catchError(this.handleError(`getPokemons`, []))
+      );
+    }    
+
+    // permet d'afficher les un log
+    private log(message:string){
+      console.log(message);
     }
-      
-    // Retourne le pokémon avec l'identifiant passé en paramètre
-    getPokemon(id: number): Pokemon {
-      let pokemons = this.getPokemons();
-      
-      for(let index = 0; index < pokemons.length; index++) {
-        if(id === pokemons[index].id) {
-          return pokemons[index];
-        }
+    private handleError<T>(operation='operation',result ?:T){
+      return (error :any ):Observable<T> =>{
+        console.log(error);
+        console.log(`${operation} failed : ${error}`);
+        return  of(result as T);
       }
     }
+    // Retourne le pokémon avec l'identifiant passé en paramètre
+    getPokemon(id: number): Observable<Pokemon> {
+      const url = `${this.pokemonsUrl}/${id}`;
+      return this.http.get<Pokemon>(url).pipe(
+        tap(_=>this.log(`fetched pokemons id ${id}`)),
+        catchError(this.handleError<Pokemon>(`getPokemon id ${id}`))
+      );
+    }
+    
+    
+    // Retourne tous les types de pokémons
     getPokemonTypes():Array<string>{
       let pokemonsType: Array<string> = [];
       let pokemons = this.getPokemons();
-      for(let index = 0; index < pokemons.length; index++ ){
+    /*
+      for(let index = 0; index < 5; index++ ){
         let types = pokemons[index].types;
         for(let i = 0; i< types.length; i++){
           if(pokemonsType.indexOf(types[i]) === -1 ){
@@ -31,7 +51,8 @@ export class PokemonsService {
           }
         }
       }
-
+*/
+ pokemonsType = [`Eau`,`Poison`,`Mario`,'Lion'];
       return pokemonsType;
     }
 

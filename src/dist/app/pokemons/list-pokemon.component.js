@@ -25,7 +25,9 @@ var ListPokemonComponent = /** @class */ (function () {
      que dans le constructeur.
     */
     ListPokemonComponent.prototype.ngOnInit = function () {
-        this.pokemons = this.pokemonService.getPokemons();
+        var _this = this;
+        this.pokemonService.getPokemons()
+            .subscribe(function (pokemons) { return _this.pokemons = pokemons; });
     };
     ListPokemonComponent.prototype.selectPokemon = function (pokemon) {
         var link = ["/pokemon", pokemon.id];
