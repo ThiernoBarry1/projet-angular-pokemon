@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, TemplateRef } from '@angular/core';
 import { Pokemon } from './pokemon';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable, of } from "rxjs";
@@ -37,12 +37,39 @@ export class PokemonsService {
       );
     }
     
-    
+    updatePokemon(pokemon:Pokemon): Observable<Pokemon> {
+      const httpObtions = {
+        headers: new HttpHeaders({'Content-type':'application/json'})
+      };
+      return this.http.put(this.pokemonsUrl, pokemon, httpObtions).pipe(
+        tap(_=>this.log(`updated pokemon id ${pokemon.id}`)),
+        catchError(this.handleError<any>(`updatedPokemon`))
+      );
+    }
+
+    searchPokemons(term: string): Observable<Pokemon []>{
+        if(!term.trim()){
+          return of([]);
+        }
+        return this.http.get<Pokemon[]>(`${this.pokemonsUrl}/?name=${term}`).pipe(
+          tap(_=>this.log(`found pokemons matching ${term}`)),
+          catchError(this.handleError<Pokemon []>(`searchPokemons`,[]))
+        );
+    }
+    deletePokemon(pokemon: Pokemon): Observable<Pokemon>{
+      const url = `${this.pokemonsUrl}/${pokemon.id}`;
+      const httpObtions = {
+        headers: new HttpHeaders({'Content-type':'application/json'})
+      };
+      return this.http.delete<Pokemon>(url, httpObtions).pipe(
+        tap(_=>this.log(`deleted pokemon id ${pokemon.id}`)),
+        catchError(this.handleError<Pokemon>(`deletePokemon`))
+      )
+    }
     // Retourne tous les types de pokémons
     getPokemonTypes():Array<string>{
       let pokemonsType: Array<string> = [];
-      let pokemons = this.getPokemons();
-    /*
+    /*  let pokemons = this.getPokemons();
       for(let index = 0; index < 5; index++ ){
         let types = pokemons[index].types;
         for(let i = 0; i< types.length; i++){

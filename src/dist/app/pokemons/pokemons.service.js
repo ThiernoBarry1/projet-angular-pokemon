@@ -41,11 +41,32 @@ var PokemonsService = /** @class */ (function () {
         var url = this.pokemonsUrl + "/" + id;
         return this.http.get(url).pipe(operators_1.tap(function (_) { return _this.log("fetched pokemons id " + id); }), operators_1.catchError(this.handleError("getPokemon id " + id)));
     };
+    PokemonsService.prototype.updatePokemon = function (pokemon) {
+        var _this = this;
+        var httpObtions = {
+            headers: new http_1.HttpHeaders({ 'Content-type': 'application/json' })
+        };
+        return this.http.put(this.pokemonsUrl, pokemon, httpObtions).pipe(operators_1.tap(function (_) { return _this.log("updated pokemon id " + pokemon.id); }), operators_1.catchError(this.handleError("updatedPokemon")));
+    };
+    PokemonsService.prototype.searchPokemons = function (term) {
+        var _this = this;
+        if (!term.trim()) {
+            return rxjs_1.of([]);
+        }
+        return this.http.get(this.pokemonsUrl + "/?name=" + term).pipe(operators_1.tap(function (_) { return _this.log("found pokemons matching " + term); }), operators_1.catchError(this.handleError("searchPokemons", [])));
+    };
+    PokemonsService.prototype.deletePokemon = function (pokemon) {
+        var _this = this;
+        var url = this.pokemonsUrl + "/" + pokemon.id;
+        var httpObtions = {
+            headers: new http_1.HttpHeaders({ 'Content-type': 'application/json' })
+        };
+        return this.http.delete(url, httpObtions).pipe(operators_1.tap(function (_) { return _this.log("deleted pokemon id " + pokemon.id); }), operators_1.catchError(this.handleError("deletePokemon")));
+    };
     // Retourne tous les types de pokémons
     PokemonsService.prototype.getPokemonTypes = function () {
         var pokemonsType = [];
-        var pokemons = this.getPokemons();
-        /*
+        /*  let pokemons = this.getPokemons();
           for(let index = 0; index < 5; index++ ){
             let types = pokemons[index].types;
             for(let i = 0; i< types.length; i++){
